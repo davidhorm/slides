@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-	<title>reveal.js</title>
+	<title>David's Learnings on Clean Architecture</title>
 
 	<link rel="stylesheet" href="dist/reset.css">
 	<link rel="stylesheet" href="dist/reveal.css">
@@ -19,15 +19,7 @@
 	<div class="reveal">
 		<div class="slides">
 
-			<section>
-				TL;DR
-				<aside class="notes">
-					- TOC
-					- Familiar with concepts
-					- Inspire you organize your code like this
-					- Tour Bus & Buzz Words
-				</aside>
-			</section>
+			<section data-external="2020-08-learnings/01-tldr.html"></section>
 
 			<section>
 				Journey
@@ -88,9 +80,9 @@
 				Evolving Clean Architecture
 				<aside class="notes">
 					- Uncle Bob inspired by several architectures
-					- 3-layered 
-					-> inward dependency 
-					-> rotate 
+					- 3-layered
+					-> inward dependency
+					-> rotate
 					-> DDD in middle
 				</aside>
 			</section>
@@ -125,7 +117,15 @@
 			hash: true,
 
 			// Learn about plugins: https://revealjs.com/plugins/
-			plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+			plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+
+			// Deprecated plugins syntax:
+			dependencies: [
+				{
+					src: 'node_modules/reveal_external/external/external.js',
+					condition: () => !!document.querySelector('[data-external],[data-external-replace]')
+				},
+			],
 		});
 	</script>
 </body>
