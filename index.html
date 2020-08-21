@@ -12,7 +12,7 @@
 	<link rel="stylesheet" href="dist/theme/black.css" id="theme">
 
 	<!-- Theme used for syntax highlighted code -->
-	<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
+	<link rel="stylesheet" href="plugin/highlight/vs2015.css" id="highlight-theme">
 
 	<style>
 		.container {
@@ -119,12 +119,68 @@
 				</aside>
 			</section>
 
-			<section>
-				Functional Programming
-				<aside class="notes">
+			<section data-markdown>
+				<script type="text/template">
+					## Why Learn Functional Programming?
+					- Is OOP really that great? <!-- .element: class="fragment fade-up" -->
+					- So I can code React as intended <!-- .element: class="fragment fade-up" -->
+					- ~400 pages to mathematically prove 1+1=2 <!-- .element: class="fragment fade-up" -->
+					- Changed how I write code (for the better) <!-- .element: class="fragment fade-up" -->
+					- Easier to reason code <!-- .element: class="fragment fade-up" -->
+					- Can slowly dial code toward FP <!-- .element: class="fragment fade-up" -->
+	
+					Notes:
 					- What caught my attention (sample)
 					- What convinced me (math)
 					- VS OOP
+				</script>
+			</section>
+
+			<section>
+				OOP Meme Example
+				<pre><code data-line-numbers="2|4-5,8-9|3,6-7|11|13-17">
+const makeVeggieSandwich = (ingredients: Ingredient[]) => {
+	let sandwichIngredients = [];
+	for (let i = 0; i < ingredients.length; i++) {
+		if (ingredients[i].type !== 'meat') {
+			const slicedIngredient = getSlicedIngredient(ingredients[i]);
+			sandwichIngredients.push(slicedIngredient);
+		}
+	}
+
+	sortIngredients(sandwichIngredients);
+
+	let sandwich = 'The sandwhich has: ';
+	for (let j = 0; j < sandwichIngredients.length; j++) {
+		sandwich += `${sandwichIngredients[j].value}, and `;
+	}
+	return sandwich;
+};
+				</code></pre>
+				
+				<aside class="notes" data-markdown>
+					- OOP Example
+				</aside>
+			</section>
+
+			<section>
+				FP Meme Example
+				<pre><code data-line-numbers="2|3|4|5|6|7-8|9|11">
+const makeVeggieSandwich = (ingredients: Ingredient[]) => {
+	const sandwich = ingredients
+		.filter((ingredient) => ingredient.type !== 'meat')
+		.map(getSlicedIngredient)
+		.sort(sortIngredients)
+		.reduce((sandwich, ingredient) => { 
+				return `${sandwich}${ingredient.value}, and `;
+			}, 'The sandwhich has: ');
+	
+	return sandwich;
+};
+				</code></pre>
+				
+				<aside class="notes" data-markdown>
+					- FP Example
 				</aside>
 			</section>
 
