@@ -93,6 +93,7 @@
 				<ul class="fragment fade-up" data-fragment-index="1">
 					<li>Functional Components & Hooks</li>
 				</ul>
+				<br />
 				<img class="fragment fade-up" data-fragment-index="1" src="http://img.youtube.com/vi/dpw9EHDh2bM/0.jpg" /><br />
 				<img class="fragment fade-up" data-fragment-index="1" src="/icons/youtube.png" style="margin: 0;" />
 				<a class="fragment fade-up" data-fragment-index="1" href="https://www.youtube.com/watch?v=dpw9EHDh2bM">React Today and Tomorrow and 90% Cleaner React With Hooks</a>
@@ -135,6 +136,62 @@
 					- 1 Input 1 Output
 					- Sides effects move to the edge (wut?)
 					- Hint at Clean Architecture
+				</aside>
+			</section>
+
+			<section>
+				<h2>FP: Additional Resources</h2>
+				<div class="container">
+					<div class="col">
+						<ul>
+							<li class="fragment fade-up" data-fragment-index="1">📖 <a href="https://mostly-adequate.gitbooks.io/mostly-adequate-guide/content/">Mostly adequate guide to FP – Brian Lonsdorf</a></li>
+							<li class="fragment fade-up" data-fragment-index="2">
+								<img class="fragment fade-up" data-fragment-index="1" src="/icons/youtube.png" style="margin: 0;" />
+								<a href="https://www.youtube.com/watch?v=QyJZzq0v7Z4">Why Isn't Functional Programming the Norm? – Richard Feldman</a>
+							</li>
+							<li class="fragment fade-up" data-fragment-index="3">
+								<img class="fragment fade-up" data-fragment-index="1" src="/icons/youtube.png" style="margin: 0;" />
+								<a href="https://www.youtube.com/watch?v=0if71HOyVjY">GOTO 2018 • Functional Programming in 40 Minutes • Russ Olsen</a>
+							</li>
+							<li class="fragment fade-up" data-fragment-index="4">
+								<img class="fragment fade-up" data-fragment-index="1" src="/icons/youtube.png" style="margin: 0;" />
+								<a href="https://www.youtube.com/watch?v=srQt1NAHYC0">Functional Design Patterns - Scott Wlaschin</a>
+							</li>
+							<li class="fragment fade-up" data-fragment-index="5">
+								<img class="fragment fade-up" data-fragment-index="1" src="/icons/youtube.png" style="margin: 0;" />
+								<a href="https://www.youtube.com/watch?v=PLFl95c-IiU">Scott Wlaschin - Talk Session: Domain Modeling Made Functional</a>
+							</li>
+						</ul>
+					</div>
+			
+					<div class="col r-stack">
+						<img class="fragment fade-up fade-in-then-out" data-fragment-index="1" src="https://raw.githubusercontent.com/MostlyAdequate/mostly-adequate-guide/master/images/cover.png" style="height: 80%;" />
+						<img class="fragment fade-up fade-in-then-out" data-fragment-index="2" src="http://img.youtube.com/vi/QyJZzq0v7Z4/0.jpg" />
+						<img class="fragment fade-up fade-in-then-out" data-fragment-index="3" src="http://img.youtube.com/vi/0if71HOyVjY/0.jpg" />
+						<img class="fragment fade-up fade-in-then-out" data-fragment-index="4" src="http://img.youtube.com/vi/srQt1NAHYC0/0.jpg" />
+						<img class="fragment fade-up fade-in-then-out" data-fragment-index="5" src="http://img.youtube.com/vi/PLFl95c-IiU/0.jpg" />
+					</div>
+				</div>
+				
+				<aside class="notes" data-markdown>
+					- Mostly adequate guide to FP
+						- Conversational gitbook on FP with JS
+						- Has examples and quizzes
+
+					- Why FP isn't Norm?
+						- OO paradigms aren't "good"
+						- Java $$$
+						- FP is sort of a dial
+
+					- GOTO 2018
+						- non-scary diff between OOP and FP
+					  - ~400 pages to say 1+1=2
+						- Mutation bad. Immutable good.
+
+					- Functional Design Patterns - Scott Wlaschin
+						- Optional and Either and Railway Programming
+					
+					- DDD - transition to next slide
 				</aside>
 			</section>
 
@@ -195,6 +252,8 @@
 		// - https://revealjs.com/config/
 		Reveal.initialize({
 			hash: true,
+
+			width: 1440,
 
 			// Learn about plugins: https://revealjs.com/plugins/
 			plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
