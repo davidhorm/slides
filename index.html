@@ -119,6 +119,8 @@
 				</aside>
 			</section>
 
+			<!-- TODO: OOP vs FP Design Patterns -->
+
 			<section data-markdown>
 				<script type="text/template">
 					## Why Learn Functional Programming?
@@ -128,7 +130,6 @@
 					- Changed how I write code (for the better) <!-- .element: class="fragment fade-up" -->
 					- Easier to reason code <!-- .element: class="fragment fade-up" -->
 					- Can slowly dial code toward FP <!-- .element: class="fragment fade-up" -->
-					- Is OOP really that great? <!-- .element: class="fragment fade-up" -->
 	
 					Notes:
 					- What caught my attention (sample)
@@ -209,14 +210,90 @@
 
 			<section>
 				Functional Programming Principles
-				<aside class="notes">
-					- TODO
-					- Immutable
+				<aside class="notes" data-markdown>
+					- Function Signatures shouldn't lie - (hips don't lie)
+					- Separate Pure from Impure functions. Pure = Mathematically pure
+					- Pure Input 
+						- Move DateTime outside
+					- Pure Output
+						- Immutable
+						- Sides effects move to the edge (wut?)
+						- Hint at Clean Architecture
 					- 1 Input 1 Output
-					- Sides effects move to the edge (wut?)
-					- Hint at Clean Architecture
+						- Curry
+						- Error Handling
 				</aside>
 			</section>
+
+			<section data-markdown>
+				## OOP Error Handling
+				const getCharacterName = (userId: number): string => {
+					fetch(url)
+					.then((response) => {
+						if (!response.ok) {
+							throw new Error('HTTP error')
+						}
+
+						const user = response.data();
+						if (!user) {
+							throw new Error('no user object');
+						}
+
+						if (!user.name) {
+							throw new Error('No name property');
+						}
+
+						return user.name;
+					})
+					.catch((error) => {
+						throw new Error('Fetch Error');
+					});
+				};
+
+
+				## Part 1 ===================
+				const fetchUser = (userId: number): Error | object => {
+					fetch(url)
+					.then((response) => {
+						if (!response.ok) {
+							return Error('HTTP error')
+						}
+
+						return response.json();
+					})
+					.catch((error) => {
+						return Error('Fetch Error');
+					});
+				};
+
+				const parseCharacterName = (character: Error | string): Error | string => {
+					if (character instanceof Error) {
+						return character;
+					}
+
+					if (!character) {
+						return new Error('no user object');
+					}
+
+					if (!character.name) {
+						return new Error('No name property');
+					}
+				};
+
+				const getCharacterName = () => {
+					const character = await fetchUser(1);
+					const characterName = parseCharacterName(character);
+					return characterName;
+				};
+			</section>
+
+			<section data-markdown>
+					## FP Error Handling
+					const doSomething = (url) => {
+						fetch(url) // http Error
+						user.name // null check
+					};
+				</section>
 
 			<section>
 				<h2>FP: Additional Resources</h2>
