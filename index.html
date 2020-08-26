@@ -499,21 +499,148 @@ const getCharacterName = (id: number): Either<Error,string> => {
 			</section>
 
 			<section>
-				Domain Driven Design w/ FP
-				<aside class="notes">
-					- Make illegal state impossible to implement.
-					- Simple Validation
-					- Examples: Shipping vs Billing address
-				</aside>
+				<h2>Domain Driven Design</h2>
+				Ubiquitous Language
+				<pre><code data-trim>
+					module CardGame =
+						type Suit = Club | Diamond | Spade | Heart
+						type Rank = Two | Three | Four | Five | ...
+						type Card = Suit * Rank
+						type Hand = Card list
+						type Deck = Card list
+
+						type Deal = Deck -> (Deck * Card)
+				</code></pre>
 			</section>
 
 			<section>
-				Domain Driven Design Principles
-				<aside class="notes">
-					- Bounded Context & Ubiquitous Language
-					- Event Storming
-					- DDD heart Clean Architecture
-				</aside>
+				<h2>Domain Driven Design</h2>
+				Ubiquitous Language
+				<pre><code data-trim>
+					module CardGame =
+						type Suit = Club | Diamond | Spade | Heart
+						type Rank = Two | Three | Four | Five | ...
+						type Card = Suit * Rank
+						type Hand = Card list
+						type Deck = Card list
+
+						type ShuffledDeck = Card list
+						type Shuffle = Deck -> ShuffledDeck
+						type Deal = ShuffledDeck -> (ShuffledDeck * Card)
+				</code></pre>
+			</section>
+
+			<section>
+				<h2>Domain Driven Design</h2>
+				Make illegal state impossible to represent
+				<pre><code data-trim>
+					type Contact = {
+						FirstName: string
+						MiddleInitial: string
+						LastName: string
+
+						EmailAddress: string
+						IsEmailVerified: bool
+					}
+				</code></pre>
+			</section>
+
+			<section>
+				<h2>Domain Driven Design</h2>
+				Make illegal state impossible to represent
+				<pre><code data-trim>
+					type PersonalName = {
+						FirstName: String50
+						MiddleInitial: String1 option
+						LastName: String50
+					}
+
+					type EmailContactInfo = {
+						EmailAddress: EmailAddress
+						IsEmailVerified: bool
+					}
+
+					type Contact = {
+						Name: PersonalName
+						Email: EmailContactInfo
+					}
+				</code></pre>
+			</section>
+
+			<section>
+				<h2>Domain Driven Design</h2>
+				Make illegal state impossible to represent
+				<pre><code data-trim>
+					type VerifiedEmail = VerifiedEmail of EmailAddress
+
+					type VerificationService = (EmailAddress * VerificationHash) -> VerifiedEmail
+
+					type EmailContactInfo = 
+						| Unverified of EmailAddress
+						| Verified of VerifiedEmail
+				</code></pre>
+			</section>
+
+			<section data-markdown>
+				<script type="text/template">
+				## Benefits Domain Modeling with FP
+				- Make illegal state impossible to represent <!-- .element: class="fragment fade-up" -->
+				- Identify validation constraints <!-- .element: class="fragment fade-up" -->
+				- Identify optional values <!-- .element: class="fragment fade-up" -->
+				- Clear Domain logic <!-- .element: class="fragment fade-up" -->
+				- Refactoring toward deeper domain insight <!-- .element: class="fragment fade-up" -->
+				</script>
+			</section>
+
+			<section data-markdown>
+				<script type="text/template">
+				## Bounded Context & Ubiquitous Language 
+				- Tomato is... <!-- .element: class="fragment fade-up" -->
+					- vegetable to a chef <!-- .element: class="fragment fade-up" -->
+					- fruit to a botanist <!-- .element: class="fragment fade-up" -->
+					- feedback to a stage performer <!-- .element: class="fragment fade-up" -->
+				</script>
+			</section>
+
+			<section data-markdown>
+				<script type="text/template">
+				## Bounded Context & Ubiquitous Language 
+				- Juvenile is... <!-- .element: class="fragment fade-up" -->
+					- Form CR-23J to law enforcement <!-- .element: class="fragment fade-up" -->
+					- Something to adjudicate to courts <!-- .element: class="fragment fade-up" -->
+					- Something to charge for to prosecutors <!-- .element: class="fragment fade-up" -->
+					- Something to move past to probation officer <!-- .element: class="fragment fade-up" -->
+				</script>
+			</section>
+
+			<section data-markdown>
+				<script type="text/template">
+				## Bounded Context
+				- Could be separated by...
+					- language <!-- .element: class="fragment fade-up" -->
+					- user roles <!-- .element: class="fragment fade-up" -->
+					- team priorities <!-- .element: class="fragment fade-up" -->
+				</script>
+			</section>
+
+			<section>
+				<h2>DDD: Additional Resources</h2>
+				<div class="container">
+					<div class="col">
+						<ul>
+							<li class="fragment fade-up" data-fragment-index="1">📖 <a href="https://www.amazon.com/Domain-Driven-Design-Tackling-Complexity-Software/dp/0321125215/ref=sr_1_3?crid=2SQJ5J3L13H5T&dchild=1&keywords=domain+driven+design&qid=1598423843&sprefix=domain+driven%2Caps%2C-1&sr=8-3">Domain-Driven Design by Eric Evans</a></li>
+							<li class="fragment fade-up" data-fragment-index="2">
+								<img class="fragment fade-up" data-fragment-index="1" src="/icons/youtube.png" style="margin: 0;" />
+								<a href="https://www.youtube.com/watch?v=U6CeaA-Phqo">Domain Driven Design: The Good Parts - Jimmy Bogard</a>
+							</li>
+						</ul>
+					</div>
+			
+					<div class="col r-stack">
+						<img class="fragment fade-up fade-in-then-out" data-fragment-index="1" src="https://images-na.ssl-images-amazon.com/images/I/51sZW87slRL._SX375_BO1,204,203,200_.jpg"/>
+						<img class="fragment fade-up fade-in-then-out" data-fragment-index="2" src="http://img.youtube.com/vi/U6CeaA-Phqo/0.jpg" />
+					</div>
+				</div>
 			</section>
 
 			<section>
