@@ -166,17 +166,17 @@
 			<section data-auto-animate>
 				<h2>Arrow Function Syntax</h2>
 				<pre><code data-trim data-line-numbers="1-4|5-7|9|11">
-					function addOne(value: number) {
+					function addOne(value) {
 						return value + 1;
 					}
 
-					const addOne = (value: number) => {
+					const addOne = (value) => {
 						return value + 1;
 					};
 
-					const addOne = (oldValue: number) => { return oldValue + 1; };
+					const addOne = (oldValue) => { return oldValue + 1; };
 
-					const addOne = (oldValue: number) => oldValue + 1;
+					const addOne = (oldValue) => oldValue + 1;
 				</code></pre>
 			</section>
 
@@ -184,11 +184,11 @@
 				<h2>Make Veggie 🥪: OOP Example</h2>
 				<pre><code data-trim data-line-numbers="1-3|5-6,9-10|4,7-8|12|14-18">
 					// ['Loaf of Bread', 'Loaf of Bread', 'Slab Bacon', 'Whole Tomato', 'Head of Lettuce']
-					// => 'The sandwich has: slice of Bread, sliced Tomato, and Lettuce leaf, and slice of Bread'
-					const makeVeggieSandwich = (ingredients: string[]) => {
+					// => 'The sandwich has: slice of Bread, sliced Tomato, Lettuce leaf, slice of Bread'
+					const makeVeggieSandwich = (ingredients: string[]): string => {
 						let sandwichIngredients = [];
 						for (let i = 0; i < ingredients.length; i++) {
-							if (ingredients[i].type !== 'meat') {
+							if (isVeggieType(ingredients[i])) {
 								const slicedIngredient = getSlicedIngredient(ingredients[i]);
 								sandwichIngredients.push(slicedIngredient);
 							}
@@ -198,7 +198,7 @@
 
 						let sandwich = 'The sandwich has: ';
 						for (let j = 0; j < sandwichIngredients.length; j++) {
-							sandwich += `${sandwichIngredients[j].value}, and `;
+							sandwich += `${sandwichIngredients[j].value}, `;
 						}
 						return sandwich;
 					};
@@ -213,14 +213,14 @@
 				<h2>Make Veggie 🥪: FP Example</h2>
 				<pre><code data-trim data-line-numbers="1-3|4|5|6|7|8-11|9|10|13">
 					// ['Loaf of Bread', 'Loaf of Bread', 'Slab Bacon', 'Whole Tomato', 'Head of Lettuce']
-					// => 'The sandwich has: slice of Bread, sliced Tomato, and Lettuce leaf, and slice of Bread'
-					const makeVeggieSandwich = (ingredients: string[]) => {
+					// => 'The sandwich has: slice of Bread, sliced Tomato, Lettuce leaf, slice of Bread'
+					const makeVeggieSandwich = (ingredients: string[]): string => {
 						const sandwich = ingredients
-							.filter((ingredient) => ingredient.type !== 'meat')
+							.filter(isVeggieType)
 							.map(getSlicedIngredient)
 							.sort(sortIngredients)
 							.reduce(
-								(sandwich, ingredient) => `${sandwich}${ingredient.value}, and `,
+								(sandwich, ingredient) => `${sandwich}, ${ingredient.value}`,
 								'The sandwich has: '
 							);
 						
@@ -250,75 +250,115 @@
 				</aside>
 			</section>
 
-			<section data-markdown>
-				## OOP Error Handling
-				const getCharacterName = (userId: number): string => {
-					fetch(url)
-					.then((response) => {
-						if (!response.ok) {
-							throw new Error('HTTP error')
-						}
+			<section>
+				<h2>OOP Error Handling</h2>
+				<pre><code data-trim data-line-numbers="1-3|4-9|10-20|22-24">
+					// 1 => "Luke Skywalker"
+					const getCharacterName = (id: number): string => {
+						fetch(`https://swapi.dev/api/people/${id}/`)
+						.then((response) => { 
+							if (!response.ok) {
+								throw new Error('HTTP error')
+							}
 
-						const user = response.data();
-						if (!user) {
-							throw new Error('no user object');
-						}
-
-						if (!user.name) {
-							throw new Error('No name property');
-						}
-
-						return user.name;
-					})
-					.catch((error) => {
-						throw new Error('Fetch Error');
-					});
-				};
-
-
-				## Part 1 ===================
-				const fetchUser = (userId: number): Error | object => {
-					fetch(url)
-					.then((response) => {
-						if (!response.ok) {
-							return Error('HTTP error')
-						}
-
-						return response.json();
-					})
-					.catch((error) => {
-						return Error('Fetch Error');
-					});
-				};
-
-				const parseCharacterName = (character: Error | string): Error | string => {
-					if (character instanceof Error) {
-						return character;
-					}
-
-					if (!character) {
-						return new Error('no user object');
-					}
-
-					if (!character.name) {
-						return new Error('No name property');
-					}
-				};
-
-				const getCharacterName = () => {
-					const character = await fetchUser(1);
-					const characterName = parseCharacterName(character);
-					return characterName;
-				};
+							response.json()
+							.then((character) => {
+								if (!character) {
+									throw new Error('no character object');
+								}
+	
+								if (!character.name) {
+									throw new Error('No name property');
+								}
+	
+								return character.name;
+							});
+						})
+						.catch((error) => {
+							throw new Error(`Fetch Error: ${error}`);
+						});
+					};
+				</code></pre>
 			</section>
 
-			<section data-markdown>
-					## FP Error Handling
-					const doSomething = (url) => {
-						fetch(url) // http Error
-						user.name // null check
-					};
-				</section>
+			<section>
+				<h2>FP Error Handling</h2>
+				<pre><code data-line-numbers="2-3,7,13|2-3,10|17-21|23-31|34-39|41-42|48-55|58,63"><script type="text/template">
+// 1 => { name: 'Luke Skywalker' }
+const fetchUser = (id: number): Error | object => {
+	fetch(`https://swapi.dev/api/people/${id}/`)
+	.then((response) => {
+		if (!response.ok) {
+			return new Error('HTTP error')
+		}
+
+		return response.json();
+	})
+	.catch((error) => {
+		return new Error(`Fetch Error: ${error}`);
+	});
+};
+
+// { name: 'Luke Skywalker' } => 'Luke Skywalker'
+const parseCharacterName = (characterOrError: Error | object): Error | string => {
+	if (characterOrError instanceof Error) {
+		return character;
+	}
+
+	if (!characterOrError) {
+		return new Error('no character object');
+	}
+
+	if (!characterOrError.name) {
+		return new Error('No name property');
+	}
+
+	return characterOrError.name;
+};
+
+// 1 => 'Luke Skywalker'
+const getCharacterName = (id: number): Error | string => {
+	const character = await fetchUser(id);
+	const characterName = parseCharacterName(character);
+	return characterName;
+};
+
+// Either Monad
+const getCharacterName = (id: number): Either<Error,string> => {
+	const character = await fetchUser(id);
+	const characterName = parseCharacterName(character);
+	return characterName;
+};
+
+// Pipeline Operator Syntax (TC39 stage 1)
+const getCharacterName = (id: number): Either<Error,string> => {
+	const characterName =
+		|> id
+		|> await fetchUser
+		|> parseCharacterName;
+	
+	return characterName;
+};
+
+// Can easily output to debug
+const getCharacterName = (id: number): Either<Error,string> => {
+	const characterName =
+		|> id
+		|> await fetchUser
+		|> console.log
+		|> parseCharacterName;
+	
+	return characterName;
+};
+				</script></code></pre>
+				<aside class="notes" data-markdown>
+					- Break into multiple functions. Return error or object.
+					- If input is error, then just return that and ignore rest of function.
+					- Put all together. if error, then could return that.
+					- Twist the dial further toward FP, and get Either monad pattern
+					- Twist further and get Pipeline operator and can easily debug
+				</aside>
+			</section>
 
 			<section>
 				<h2>FP: Additional Resources</h2>
