@@ -380,7 +380,7 @@ const fetchCharacter = (id: number): Error | object => {
 // { name: 'Luke Skywalker' } => 'Luke Skywalker'
 const parseCharacterName = (characterOrError: Error | object): Error | string => {
 	if (characterOrError instanceof Error) {
-		return character;
+		return characterOrError;
 	}
 
 	if (!characterOrError) {
@@ -435,6 +435,7 @@ const getCharacterName = (id: number): Either<Error,string> => {
 					- Put all together. if error, then could return that.
 					- Twist the dial further toward FP, and get Either monad pattern
 					- Twist further and get Pipeline operator and can easily debug
+					- Understand concepts easily
 				</aside>
 			</section>
 
@@ -456,10 +457,6 @@ const getCharacterName = (id: number): Either<Error,string> => {
 								<img class="fragment fade-up" data-fragment-index="1" src="/icons/youtube.png" style="margin: 0;" />
 								<a href="https://www.youtube.com/watch?v=srQt1NAHYC0">Functional Design Patterns - Scott Wlaschin</a>
 							</li>
-							<li class="fragment fade-up" data-fragment-index="5">
-								<img class="fragment fade-up" data-fragment-index="1" src="/icons/youtube.png" style="margin: 0;" />
-								<a href="https://www.youtube.com/watch?v=PLFl95c-IiU">Scott Wlaschin - Talk Session: Domain Modeling Made Functional</a>
-							</li>
 						</ul>
 					</div>
 			
@@ -468,7 +465,6 @@ const getCharacterName = (id: number): Either<Error,string> => {
 						<img class="fragment fade-up fade-in-then-out" data-fragment-index="2" src="http://img.youtube.com/vi/QyJZzq0v7Z4/0.jpg" />
 						<img class="fragment fade-up fade-in-then-out" data-fragment-index="3" src="http://img.youtube.com/vi/0if71HOyVjY/0.jpg" />
 						<img class="fragment fade-up fade-in-then-out" data-fragment-index="4" src="http://img.youtube.com/vi/srQt1NAHYC0/0.jpg" />
-						<img class="fragment fade-up fade-in-then-out" data-fragment-index="5" src="http://img.youtube.com/vi/PLFl95c-IiU/0.jpg" />
 					</div>
 				</div>
 				
@@ -494,10 +490,10 @@ const getCharacterName = (id: number): Either<Error,string> => {
 				</aside>
 			</section>
 
-			<section>
+			<section data-auto-animate>
 				<h2>Domain Driven Design</h2>
 				Ubiquitous Language
-				<pre><code data-trim>
+				<pre data-id="deck-code"><code data-trim data-line-numbers="1-8|8">
 					module CardGame =
 						type Suit = Club | Diamond | Spade | Heart
 						type Rank = Two | Three | Four | Five | ...
@@ -507,12 +503,15 @@ const getCharacterName = (id: number): Either<Error,string> => {
 
 						type Deal = Deck -> (Deck * Card)
 				</code></pre>
+				<aside class="notes" data-markdown>
+					- Point of Ubiquitous Language is Domain Expert can contribute
+				</aside>
 			</section>
 
-			<section>
+			<section data-auto-animate>
 				<h2>Domain Driven Design</h2>
 				Ubiquitous Language
-				<pre><code data-trim>
+				<pre data-id="deck-code"><code data-trim data-line-numbers="8-10">
 					module CardGame =
 						type Suit = Club | Diamond | Spade | Heart
 						type Rank = Two | Three | Four | Five | ...
@@ -526,10 +525,10 @@ const getCharacterName = (id: number): Either<Error,string> => {
 				</code></pre>
 			</section>
 
-			<section>
+			<section data-auto-animate>
 				<h2>Domain Driven Design</h2>
 				Make illegal state impossible to represent
-				<pre><code data-trim>
+				<pre data-id="contact-code"><code data-trim data-line-numbers>
 					type Contact = {
 						FirstName: string
 						MiddleInitial: string
@@ -541,11 +540,11 @@ const getCharacterName = (id: number): Either<Error,string> => {
 				</code></pre>
 			</section>
 
-			<section>
+			<section data-auto-animate>
 				<h2>Domain Driven Design</h2>
 				Make illegal state impossible to represent
-				<pre><code data-trim>
-					type PersonalName = {
+				<pre data-id="contact-code"><code data-trim data-line-numbers="1-15|7-10">
+					type PersonName = {
 						FirstName: String50
 						MiddleInitial: String1 option
 						LastName: String50
@@ -557,16 +556,22 @@ const getCharacterName = (id: number): Either<Error,string> => {
 					}
 
 					type Contact = {
-						Name: PersonalName
+						Name: PersonName
 						Email: EmailContactInfo
 					}
 				</code></pre>
 			</section>
 
-			<section>
+			<section data-auto-animate>
 				<h2>Domain Driven Design</h2>
 				Make illegal state impossible to represent
-				<pre><code data-trim>
+				<pre data-id="contact-code"><code data-trim data-line-numbers="7-13">
+					type PersonName = {
+						FirstName: String50
+						MiddleInitial: String1 option
+						LastName: String50
+					}
+
 					type VerifiedEmail = VerifiedEmail of EmailAddress
 
 					type VerificationService = (EmailAddress * VerificationHash) -> VerifiedEmail
@@ -574,6 +579,11 @@ const getCharacterName = (id: number): Either<Error,string> => {
 					type EmailContactInfo = 
 						| Unverified of EmailAddress
 						| Verified of VerifiedEmail
+					
+					type Contact = {
+						Name: PersonName
+						Email: EmailContactInfo
+					}
 				</code></pre>
 			</section>
 
@@ -595,6 +605,9 @@ const getCharacterName = (id: number): Either<Error,string> => {
 					- vegetable to a chef <!-- .element: class="fragment fade-up" -->
 					- fruit to a botanist <!-- .element: class="fragment fade-up" -->
 					- feedback to a stage performer <!-- .element: class="fragment fade-up" -->
+
+				Notes:
+				- Means different things depending on role
 				</script>
 			</section>
 
@@ -606,6 +619,9 @@ const getCharacterName = (id: number): Either<Error,string> => {
 					- Something to adjudicate to courts <!-- .element: class="fragment fade-up" -->
 					- Something to charge for to prosecutors <!-- .element: class="fragment fade-up" -->
 					- Something to move past to probation officer <!-- .element: class="fragment fade-up" -->
+				
+				Notes:
+				- Want to break up domains by different bounded context
 				</script>
 			</section>
 
@@ -627,14 +643,24 @@ const getCharacterName = (id: number): Either<Error,string> => {
 							<li class="fragment fade-up" data-fragment-index="1">📖 <a href="https://www.amazon.com/Domain-Driven-Design-Tackling-Complexity-Software/dp/0321125215/ref=sr_1_3?crid=2SQJ5J3L13H5T&dchild=1&keywords=domain+driven+design&qid=1598423843&sprefix=domain+driven%2Caps%2C-1&sr=8-3">Domain-Driven Design by Eric Evans</a></li>
 							<li class="fragment fade-up" data-fragment-index="2">
 								<img class="fragment fade-up" data-fragment-index="1" src="/icons/youtube.png" style="margin: 0;" />
+								<a href="https://www.youtube.com/watch?v=PLFl95c-IiU">Scott Wlaschin - Talk Session: Domain Modeling Made Functional</a>
+							</li>
+							<li class="fragment fade-up" data-fragment-index="3">
+								<img class="fragment fade-up" data-fragment-index="1" src="/icons/youtube.png" style="margin: 0;" />
 								<a href="https://www.youtube.com/watch?v=U6CeaA-Phqo">Domain Driven Design: The Good Parts - Jimmy Bogard</a>
+							</li>
+							<li class="fragment fade-up" data-fragment-index="4">
+								<img class="fragment fade-up" data-fragment-index="1" src="/icons/youtube.png" style="margin: 0;" />
+								<a href="https://www.youtube.com/watch?v=U6CeaA-Phqo">GOTO 2018 • 50.000 Orange Stickies Later • Alberto Brandolini</a>
 							</li>
 						</ul>
 					</div>
 			
 					<div class="col r-stack">
 						<img class="fragment fade-up fade-in-then-out" data-fragment-index="1" src="https://images-na.ssl-images-amazon.com/images/I/51sZW87slRL._SX375_BO1,204,203,200_.jpg"/>
-						<img class="fragment fade-up fade-in-then-out" data-fragment-index="2" src="http://img.youtube.com/vi/U6CeaA-Phqo/0.jpg" />
+						<img class="fragment fade-up fade-in-then-out" data-fragment-index="2" src="http://img.youtube.com/vi/PLFl95c-IiU/0.jpg" />
+						<img class="fragment fade-up fade-in-then-out" data-fragment-index="3" src="http://img.youtube.com/vi/U6CeaA-Phqo/0.jpg" />
+						<img class="fragment fade-up fade-in-then-out" data-fragment-index="4" src="http://img.youtube.com/vi/NGXl1D-KwRI/0.jpg" />
 					</div>
 				</div>
 			</section>
@@ -644,35 +670,35 @@ const getCharacterName = (id: number): Either<Error,string> => {
 				<div class="container">
 					<div class="col">
 						<ul>
-							<li class="fragment fade-up" data-fragment-index="2">
+							<li class="fragment fade-up" data-fragment-index="1">
 								<a href="https://web.archive.org/web/20180526145254/http://alistair.cockburn.us/Hexagonal+architecture">Ports & Adapters</a>
 								(a.k.a. Hexagonal Architecture) by Alistair Cockburn
 							</li>
-							<li class="fragment fade-up" data-fragment-index="3">
+							<li class="fragment fade-up" data-fragment-index="2">
 								<a href="https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/">Onion Architecture</a>
 								by Jeffrey Palermo
 							</li>
-							<li class="fragment fade-up" data-fragment-index="4">
+							<li class="fragment fade-up" data-fragment-index="3">
 								<a href="https://blog.cleancoder.com/uncle-bob/2011/09/30/Screaming-Architecture.html">Screaming Architecture</a>
 								by "Uncle Bob" Martin
+							</li>
+							<li class="fragment fade-up" data-fragment-index="4">
+								<a href="https://www.amazon.com/Object-Oriented-Software-Engineering-Approach/dp/0201544350">BCE (Boundary, Control, Entity)</a>
+								architecture by Ivar Jacobson
 							</li>
 							<li class="fragment fade-up" data-fragment-index="5">
 								<a href="https://www.amazon.com/Lean-Architecture-Agile-Software-Development/dp/0470684208/">DCI (Data, Context, Interaction)</a>
 								architecture by James Coplien, & Trygve Reenskaug
 							</li>
-							<li class="fragment fade-up" data-fragment-index="6">
-								<a href="https://www.amazon.com/Object-Oriented-Software-Engineering-Approach/dp/0201544350">BCE (Boundary, Control, Entity)</a>
-								architecture by Ivar Jacobson
-							</li>
 						</ul>
 					</div>
 			
 					<div class="col r-stack">
-						<img class="fragment fade-up fade-in-then-out" data-fragment-index="2" src="https://web.archive.org/web/20180526145254im_/http:/alistair.cockburn.us/get/2304"/>
-						<img class="fragment fade-up fade-in-then-out" data-fragment-index="3" src="https://i0.wp.com/jeffreypalermo.com/wp-content/uploads/2018/06/image257b0257d255b59255d.png?resize=366%2C259&ssl=1"/>
-						<img class="fragment fade-up fade-in-then-out" data-fragment-index="4" src="https://c1.staticflickr.com/7/6093/6332546168_7d4bddbb95_z.jpg"/>
+						<img class="fragment fade-up fade-in-then-out" data-fragment-index="1" src="https://web.archive.org/web/20180526145254im_/http:/alistair.cockburn.us/get/2304"/>
+						<img class="fragment fade-up fade-in-then-out" data-fragment-index="2" src="https://i0.wp.com/jeffreypalermo.com/wp-content/uploads/2018/06/image257b0257d255b59255d.png?resize=366%2C259&ssl=1"/>
+						<img class="fragment fade-up fade-in-then-out" data-fragment-index="3" src="https://c1.staticflickr.com/7/6093/6332546168_7d4bddbb95_z.jpg" style="height: 80%"/>
+						<img class="fragment fade-up fade-in-then-out" data-fragment-index="4" src="http://www.cs.sjsu.edu/faculty/pearce/modules/patterns/enterprise/ecb/ecb_files/image011.jpg"/>
 						<img class="fragment fade-up fade-in-then-out" data-fragment-index="5" src="http://3.bp.blogspot.com/-mZH7aSbSk6I/T3Tk2Cv0jGI/AAAAAAAAAZk/gLAnwxnnMuY/w1200-h630-p-k-nu/dci.jpg"/>
-						<img class="fragment fade-up fade-in-then-out" data-fragment-index="6" src="http://www.cs.sjsu.edu/faculty/pearce/modules/patterns/enterprise/ecb/ecb_files/image011.jpg"/>
 					</div>
 				</div>
 			</section>
@@ -848,11 +874,11 @@ const getCharacterName = (id: number): Either<Error,string> => {
 				</div>
 			</section>
 
-			<section>
-				Next Steps
-				<aside class="notes">
-					- Implement w/ Docker
-				</aside>
+			<section data-markdown>
+				<script type="text/template">
+					## Next Steps?
+					- Implement POC w/ Docker
+				</script>
 			</section>
 
 		</div>
