@@ -90,13 +90,11 @@
 
 			<section data-auto-animate>
 				<h2>React</h2>
-				<ul class="fragment fade-up" data-fragment-index="1">
-					<li>Functional Components & Hooks</li>
-				</ul>
+				<span data-id="hook">Functional Components & Hooks</span>
 				<br />
-				<img class="fragment fade-up" data-fragment-index="1" src="http://img.youtube.com/vi/dpw9EHDh2bM/0.jpg" /><br />
-				<img class="fragment fade-up" data-fragment-index="1" src="/icons/youtube.png" style="margin: 0;" />
-				<a class="fragment fade-up" data-fragment-index="1" href="https://www.youtube.com/watch?v=dpw9EHDh2bM">React Today and Tomorrow and 90% Cleaner React With Hooks</a>
+				<img src="http://img.youtube.com/vi/dpw9EHDh2bM/0.jpg" /><br />
+				<img src="/icons/youtube.png" style="margin: 0;" />
+				<a href="https://www.youtube.com/watch?v=dpw9EHDh2bM">React Today and Tomorrow and 90% Cleaner React With Hooks</a>
 				
 				<aside class="notes" data-markdown>
 					- FC & Hooks allow me to learn something new along with everybody else.
@@ -106,10 +104,11 @@
 			<section data-auto-animate>
 				<h2>React</h2>
 				<ul>
-					<li>Functional Components & Hooks</li>
-					<li><code>useEffect()</code> for Side Effects?</li>
+					<li data-id="hook">Functional Components & Hooks</li>
+					<li class="fragment fade-up"><code>useEffect()</code> for Side Effects?</li>
 					<li class="fragment fade-up"><code>useReducer()</code> and Redux uses Immutable objects?</li>
 					<li class="fragment fade-up"><code>useMemo()</code> & Memoized?</li>
+					<li class="fragment fade-up">Ah, using concepts from Functional Programming</li>
 				</ul>
 
 				<aside class="notes" data-markdown>
@@ -153,9 +152,8 @@
 					- So I can code Functional React as intended <!-- .element: class="fragment fade-up" -->
 					- Grasp other libraries, e.g. RxJS <!-- .element: class="fragment fade-up" -->
 					- 300+ pages to mathematically prove 1+1=2 <!-- .element: class="fragment fade-up" -->
-					- Changed how I write code (for the better) <!-- .element: class="fragment fade-up" -->
-					- Easier to reason code <!-- .element: class="fragment fade-up" -->
-					- Can slowly dial code toward FP <!-- .element: class="fragment fade-up" -->
+					- Changed how I think about and write code (for the better) <!-- .element: class="fragment fade-up" -->
+					- Can slowly dial code from OOP toward FP <!-- .element: class="fragment fade-up" -->
 	
 					Notes:
 					- What caught my attention (sample)
@@ -165,7 +163,7 @@
 
 			<section data-auto-animate>
 				<h2>Arrow Function Syntax</h2>
-				<pre><code data-trim data-line-numbers="1-4|5-7|9|11">
+				<pre><code data-trim data-line-numbers="1-3|5-7|9|11">
 					function addOne(value) {
 						return value + 1;
 					}
@@ -236,11 +234,15 @@
 			<section data-markdown>
 				<script type="text/template">
 				## Functional Programming Principles
-				- Isolate Pure functions from Impure functions as much as possible <!-- .element: class="fragment fade-up" -->
+				- Isolate _Pure_ functions from _Impure_ functions as much as possible <!-- .element: class="fragment fade-up" -->
 				- Pure means same input will always return same output <!-- .element: class="fragment fade-up" -->
 				- Pure means no side effects <!-- .element: class="fragment fade-up" -->
 				- Refactor to move Impure functions to the edges of the application <!-- .element: class="fragment fade-up" -->
 					- (psst, makes sense with Clean Architecture) <!-- .element: class="fragment fade-up" -->
+				
+				Notes:
+				- explain side effects later
+				- refactor to edge = wut?
 				</script>
 			</section>
 
