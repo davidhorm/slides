@@ -651,23 +651,163 @@ const getCharacterName = (id: number): Either<Error,string> => {
 				</script>
 			</section>
 
-			<section>
-				Evolving Clean Architecture
-				<aside class="notes">
-					- Uncle Bob inspired by several architectures
-					- 3-layered
-					-> inward dependency
-					-> rotate
-					-> DDD in middle
+			<section data-auto-animate>
+				<div class="container container--col">
+					<div data-id="ui">UI</div>
+					<div data-id="a1">↓</div>
+					<div data-id="domain">Business</div>
+					<div data-id="a2">↓</div>
+					<div data-id="data">Data</div>
+				</div>
+			</section>
+
+			<section data-auto-animate>
+				<div class="container container--col">
+					<div data-id="ui">UI</div>
+					<div data-id="a1">↓</div>
+					<div data-id="domain">Business</div>
+					<div data-id="a2">↑</div>
+					<div data-id="data">Data</div>
+				</div>
+			</section>
+
+			<section data-auto-animate>
+				<div class="container container--space-evenly">
+					<div data-id="ui">UI</div>
+					<div data-id="a1">→</div>
+					<div data-id="domain">Business</div>
+					<div data-id="a2">←</div>
+					<div data-id="data">Data</div>
+				</div>
+			</section>
+
+			<section data-auto-animate>
+				<div class="container container--space-evenly">
+					<div data-id="ui">UI</div>
+					<div data-id="a1">→</div>
+					<div data-id="domain">
+						Domain:<br />
+						Use Cases<br />
+						↓ <br />
+						Entities
+					</div>
+					<div data-id="a2">←</div>
+					<div data-id="data">Data</div>
+				</div>
+
+				<aside class="notes" data-markdown>
+					- Entities are you anemic domain model
+					- Use Cases can hold can hold all the functions.
+						- Validation
+						- Events
+					- Use Cases layer defines IThingRepository
 				</aside>
 			</section>
 
-			<section>
-				Clean Architecture Benefits
-				<aside class="notes">
-					-> Value is when you want to be flexible
-					-> Value is when you have multiple inputs and outputs
+			<section data-auto-animate>
+				<div class="container container--space-evenly">
+					<div data-id="ui">
+						Framework:<br />
+						React
+					</div>
+					<div data-id="a1">→</div>
+					<div data-id="ui2">
+						Adapter:<br />
+						MVC
+					</div>
+					<div data-id="a3">→</div>
+					<div data-id="domain">
+						Domain:<br />
+						Use Cases<br />
+						↓ <br />
+						Entities
+					</div>
+					<div data-id="a2">←</div>
+					<div data-id="data">Data</div>
+				</div>
+
+				<aside class="notes" data-markdown>
+					- Adapter Layer implements IThingRepository
 				</aside>
+			</section>
+
+			<section data-auto-animate>
+				<div class="container container--space-evenly">
+					<div data-id="ui">
+						Framework:<br />
+						React
+					</div>
+					<div data-id="a1">→</div>
+					<div data-id="ui2">
+						Adapter:<br />
+						MVC
+					</div>
+					<div data-id="a3">→</div>
+					<div data-id="domain">
+						Domain:<br />
+						Use Cases<br />
+						↓ <br />
+						Entities
+					</div>
+					<div data-id="a4">←</div>
+					<div data-id="data2">
+						Adapter:<br />
+						REST API
+					</div>
+					<div data-id="a2">←</div>
+					<div data-id="data">
+						Framework:<br />
+						SQL
+					</div>
+				</div>
+			</section>
+
+			<section data-auto-animate>
+				<div class="container container--space-evenly">
+					<div data-id="ui">
+						Framework:<br />
+						Public Website<br />
+						<br />
+						Framework:<br />
+						Internal App<br />
+					</div>
+					<div data-id="a1">→</div>
+					<div data-id="ui2">
+						Adapter:<br />
+						MVC
+					</div>
+					<div data-id="a3">→</div>
+					<div data-id="domain">
+						Domain:<br />
+						Use Cases<br />
+						↓ <br />
+						Entities
+					</div>
+					<div data-id="a4">←</div>
+					<div data-id="data2">
+						Adapter:<br />
+						Public API<br />
+						<br />
+						Adapter:<br />
+						Internal API
+					</div>
+					<div data-id="a2">←</div>
+					<div data-id="data">
+						Framework:<br />
+						SQL
+					</div>
+				</div>
+			</section>
+
+			<section data-markdown>
+				<script type="text/template">
+					## Clean Architecture Benefits
+					- Independent of Frameworks <!-- .element: class="fragment fade-up" -->
+					- Testable <!-- .element: class="fragment fade-up" -->
+					- Independent of UI <!-- .element: class="fragment fade-up" -->
+					- Independent of Database <!-- .element: class="fragment fade-up" -->
+					- Independent of any external agency <!-- .element: class="fragment fade-up" -->
+				</script>
 			</section>
 
 			<section>

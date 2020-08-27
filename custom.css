@@ -2,6 +2,18 @@
   display: flex;
 }
 
+/* To make columns in slides */
 .col {
   flex: 1;
+}
+
+/* To make elements in the container a single column */
+.container--col {
+  flex-direction: column;
+}
+
+/* To make elements in the container centered */
+.container--space-evenly {
+  justify-content: space-evenly;
+  align-items: center;
 }
